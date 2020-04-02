@@ -9,14 +9,7 @@ from werkzeug.urls import url_parse
 
 @app.route('/')
 @app.route('/index')
-@login_required
 def index():
-    if current_user.get_id():
-        user = User.query.get(current_user.get_id())
-        username = user.username
-    else:
-        username = ''
-    user = {'username': username}
     posts = [
         {
             'author': {'username': 'Джанго Фримен'},
@@ -48,7 +41,7 @@ def index():
         }
     ]
 
-    return render_template('index.html', title='Цитаты из кинофильмов', user=user, posts=posts)
+    return render_template('index.html', title='Цитаты из кинофильмов', posts=posts)
 
 
 @app.route('/login', methods=['POST', 'GET'])
